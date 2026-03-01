@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สุกฤษฎิ์ วิเศษแก้ว | Digital CV v3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #0ea5e9;
+            --accent: #10b981;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'Kanit', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #0c4a6e 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+            overflow: hidden;
+        }
+
+        .bg-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            filter: blur(120px);
+            opacity: 0.15;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(-20%, -20%) scale(1);
+            }
+
+            to {
+                transform: translate(20%, 20%) scale(1.2);
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: sticky;
+            top: 4rem;
+            height: fit-content;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .profile-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 25%;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 2px solid var(--bg-dark);
+        }
+
+        .name-heading {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .role-tag {
+            color: var(--primary-light);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-dim);
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--text-main);
+        }
+
+        .contact-item i {
+            width: 18px;
+            color: var(--primary-light);
+        }
+
+        /* Main Content Styles */
+        .content-section {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .section-header .line {
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--card-border), transparent);
+        }
+
+        .profile-bio {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Experience Cards */
+        .exp-card {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-left: 1px solid var(--card-border);
+        }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .exp-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .exp-date {
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            background: rgba(99, 102, 241, 0.1);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .exp-org {
+            display: block;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .exp-list {
+            list-style: none;
+        }
+
+        .exp-list li {
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .exp-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-light);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-pill {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.9rem;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .profile-wrapper {
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .status-badge {
+                right: -10px;
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .profile-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animate">
+        <div class="bg-blob" style="top: -10%; left: -10%;"></div>
+        <div class="bg-blob" style="bottom: 10%; right: 10%; background: var(--secondary);"></div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="glass-card">
+                <div class="profile-wrapper">
+                    <!-- Path remains relative to the logic but I will use the one found in v2 for demonstration -->
+                    <img src="C:/Users/admin00/.gemini/antigravity/brain/7a4118a4-9381-4b5b-ab4b-2d1ef47e0ccf/bie_sukrit_portrait_1772248437346.png"
+                        alt="Bie Sukrit" class="profile-img">
+                    <span class="status-badge">Available</span>
+                </div>
+                <h1 class="name-heading">สุกฤษฎิ์<br>วิเศษแก้ว</h1>
+                <span class="role-tag">ศิลปิน • นักแสดง • นักลงทุน</span>
+
+                <ul class="contact-list">
+                    <li class="contact-item"><i data-feather="map-pin"></i> เชียงใหม่, ไทย</li>
+                    <li class="contact-item"><i data-feather="mail"></i> contact@sukrit.com</li>
+                    <li class="contact-item"><i data-feather="globe"></i> www.sukrit.com</li>
+                </ul>
+
+                <div style="margin-top: 2.5rem;">
+                    <h3
+                        style="font-size: 1rem; margin-bottom: 1.5rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;">
+                        Education</h3>
+                    <div style="border-left: 2px solid var(--primary); padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <p style="font-weight: 600; font-size: 0.95rem;">วิศวกรรมเมคคาทรอนิกส์</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">มจธ. (KMUTT)</p>
+                    </div>
+                    <div style="border-left: 2px solid var(--secondary); padding-left: 1.5rem;">
+                        <p style="font-weight: 600; font-size: 0.95rem;">มัธยมศึกษา</p>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">รร.มงฟอร์ตวิทยาลัย</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Introduction -->
+            <section class="content-section">
+                <div class="section-header">
+                    <i data-feather="user" style="color: var(--primary);"></i>
+                    <h2>ข้อมูลส่วนตัว (Profile)</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="glass-card">
+                    <p class="profile-bio">
+                        บุคคลที่สร้างปรากฏการณ์และมีอิทธิพลอย่างสูงในอุตสาหกรรมบันเทิงไทยตลอดกว่าทศวรรษ
+                        เปลี่ยนผ่านจากศิลปินมหาชนสู่สถานะ **"ผู้ส่งอิทธิพล (Phenomenon)"** และนักลงทุนเชิงกลยุทธ์
+                        ผู้หลอมรวมหลักการวิศวกรรมเข้ากับศิลปะการแสดงได้อย่างเป็นระบบ
+                    </p>
+                    <div class="skills-grid">
+                        <div class="skill-pill">Performance</div>
+                        <div class="skill-pill">Acting</div>
+                        <div class="skill-pill">Investment</div>
+                        <div class="skill-pill">Management</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Entertainment Experience -->
+            <section class="content-section">
+                <div class="section-header">
+                    <i data-feather="star" style="color: var(--secondary);"></i>
+                    <h2>ประสบการณ์ด้านบันเทิง</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <h3 class="exp-title">ศิลปินเพลงและการแสดง</h3>
+                        <span class="exp-date">2549 - ปัจจุบัน</span>
+                    </div>
+                    <span class="exp-org">GMM Grammy / ช่อง One31</span>
+                    <ul class="exp-list">
+                        <li>รองชนะเลิศอันดับ 1 The Star ค้นฟ้าคว้าดาว ปี 3 (จุดเริ่มต้นกระแสความนิยม)</li>
+                        <li>สร้างมาตรฐานใหม่ด้วยอัลบั้ม "Love Scenes" และซิงเกิลอันดับ 1 "I Need Somebody"</li>
+                        <li>ทูตละครไทยในประเทศจีน (Soft Power) จากผลงาน "หัวใจศิลา" & "รอยอดีตแห่งรัก"</li>
+                    </ul>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <h3 class="exp-title">นักแสดงนำละครเวทีระดับโลก</h3>
+                        <span class="exp-date">2558</span>
+                    </div>
+                    <span class="exp-org">Waterfall A New Musical (Pasadena Playhouse, USA)</span>
+                    <ul class="exp-list">
+                        <li>รับบท "นพพร" ในโปรเจกต์ดัดแปลง "ข้างหลังภาพ" สู่มาตรฐานบรอดเวย์</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Tech Projects -->
+            <section class="content-section">
+                <div class="section-header">
+                    <i data-feather="monitor" style="color: var(--primary);"></i>
+                    <h2>ผลงานเทคโนโลยี (Tech Projects)</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <h3 class="exp-title">JIBCHAIN Sensor Dashboard</h3>
+                        <span class="exp-date">2569</span>
+                    </div>
+                    <span class="exp-org">Web3 / Blockchain Application</span>
+                    <ul class="exp-list">
+                        <li>พัฒนาหน้ากระดานแสดงข้อมูลจากเซ็นเซอร์บนเครือข่าย JIBCHAIN L1 (Chain ID: 8899)</li>
+                        <li>ดึงและประมวลผลข้อมูลระดับน้ำและแรงดันแบตเตอรี่ผ่าน Smart Contract ด้วยเทคโนโลยี Viem.js</li>
+                        <li>เชื่อมต่อกราฟข้อมูล Real-time และประมวลผลค่าเฉลี่ยเคลื่อนที่เพื่อความแม่นยำด้วย React +
+                            Recharts</li>
+                        <li><a href="https://NKBest-10.github.io/jibchain-sensor-dashboard/" target="_blank"
+                                style="color: var(--secondary);">ดูผลงานบน GitHub Pages</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Investment Portfolio -->
+            <section class="content-section">
+                <div class="section-header">
+                    <i data-feather="trending-up" style="color: var(--accent);"></i>
+                    <h2>พอร์ตการลงทุนธุรกิจ</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="glass-card">
+                    <div class="exp-card" style="margin-bottom: 0;">
+                        <div class="exp-header">
+                            <h3 class="exp-title">ผู้ถือหุ้นและผู้บริหารระดับองค์กร</h3>
+                            <span class="exp-date">Current</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><strong>เดอะ วัน เอ็นเตอร์ไพรส์ (ONE31):</strong> ผู้ถือหุ้นใหญ่อันดับ 5 (2.5M+ หุ้น)
+                            </li>
+                            <li><strong>ใบอ่อน โปรดักชั่น:</strong> ผู้ถือหุ้นอันดับ 1 (สัดส่วน 33.34% สินทรัพย์ 65M+)
+                            </li>
+                            <li><strong>วัน ทำ ดี:</strong> การลงทุนเชิงกลยุทธ์สัดส่วน 4.17%</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Vision -->
+            <section class="content-section">
+                <div class="section-header">
+                    <i data-feather="eye" style="color: var(--primary-light);"></i>
+                    <h2>มุมมองอนาคต (Future Vision)</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="glass-card" style="border-left: 4px solid var(--primary);">
+                    <p class="profile-bio" style="font-style: italic; margin-bottom: 0;">
+                        "มุ่งสร้างสมดุลวิถีชีวิต (Life-Work Balance) สนับสนุนงานศาสนา และสาธารณกุศล
+                        เปิดรับเฉพาะโครงการทางศิลปะที่เกิดจากแรงบันดาลใจและมีคุณค่าทางจิตใจ"
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>
